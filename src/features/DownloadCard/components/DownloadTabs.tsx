@@ -2,7 +2,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { tabs } from '@/src/data/constants';
 import { TabIdProps } from '../types';
-import { DownloadForm } from './DownloadForm';
+import { DownloadForm } from '../container/DownloadForm';
 
 export const DownloadTabs = () => {
   const { replace } = useRouter();

@@ -4,3 +4,9 @@ export type SubmitLinkType = {
   url: string;
   mode: TabIdProps;
 };
+
+export type SubmitLinkResponseType = {
+  filename: string[];
+  message: 'Processamento concluído';
+  status: 'success';
+};
