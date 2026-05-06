@@ -9,3 +9,8 @@ export type DownloadFormProps = {
   activeTab: TabIdProps;
   description: string;
 };
+
+export type TabsButtonsProps = {
+  activeTab: TabIdProps;
+  handleTabChange: (tabId: TabIdProps) => void;
+};

@@ -1,8 +1,10 @@
 'use client';
+import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { tabs } from '@/src/data/constants';
 import { TabIdProps } from '../types';
 import { DownloadForm } from '../container/DownloadForm';
+import { TabsButtons } from './TabsButtons';
 
 export const DownloadTabs = () => {
   const { replace } = useRouter();
@@ -24,33 +26,36 @@ export const DownloadTabs = () => {
 
   return (
     <div className="w-full space-y-5">
-      <div className="grid h-auto w-full grid-cols-2 rounded-2xl bg-white/8 p-1">
-        {tabs.map((tab) => {
-          const Icon = tab.icon;
-          const isActive = activeTab === tab.id;
+      <TabsButtons activeTab={activeTab} handleTabChange={handleTabChange} />
 
-          return (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => handleTabChange(tab.id as TabIdProps)}
-              className={`flex h-11 cursor-pointer items-center justify-center gap-2 rounded-xl text-sm transition ${
-                isActive ? 'bg-primary text-slate-950' : 'text-white'
-              }`}
-            >
-              <Icon className="size-4" />
-              {tab.label}
-            </button>
-          );
-        })}
-      </div>
-
-      {activeTabData && (
-        <DownloadForm
-          activeTab={activeTab}
-          description={activeTabData.description}
-        />
-      )}
+      <AnimatePresence mode="wait">
+        {activeTabData && (
+          <motion.div
+            key={activeTab}
+            initial={{
+              opacity: 0,
+              x: activeTab === 'audio' ? 18 : -18,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
+            }}
+            exit={{
+              opacity: 0,
+              x: activeTab === 'audio' ? -18 : 18,
+            }}
+            transition={{
+              duration: 0.2,
+              ease: 'easeOut',
+            }}
+          >
+            <DownloadForm
+              activeTab={activeTab}
+              description={activeTabData.description}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

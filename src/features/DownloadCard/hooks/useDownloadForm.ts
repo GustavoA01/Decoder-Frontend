@@ -17,7 +17,7 @@ export const useDownloadForm = (activeTab: TabIdProps) => {
       onSuccess: async (data) => {
         const url = `${process.env.NEXT_PUBLIC_PYTHON_URL}/get-file/${data.filename[0]}`;
         window.location.href = url;
-        toast.success('Download iniciado com sucesso!');
+        toast.success('Download feito com sucesso!');
       },
       onError: (error) => {
         toast.error('Erro ao fazer download!');

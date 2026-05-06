@@ -1,9 +1,13 @@
+import { Variants } from 'framer-motion';
 import { AudioLines, Video } from 'lucide-react';
 
 export const headerBadges = [
-  'URL válida',
-  'Escolha rápida de formato',
-  'Integrar',
+  'YouTube',
+  'Resumo com IA',
+  'Capítulos automáticos',
+  'Transcrição',
+  'Posts prontos',
+  'Sugestões de cortes',
 ];
 
 export const tabs = [
@@ -17,6 +21,21 @@ export const tabs = [
     id: 'audio',
     label: 'Áudio',
     icon: AudioLines,
-    description: 'Extrai o audio e prepara o download em mp3 via backend.',
+    description: 'Extrai o audio do vídeo e faz download em formato mp3',
   },
 ];
+
+export const fadeUpVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};

@@ -14,7 +14,8 @@ export const DownloadHeader = () => (
       <div>
         <CardTitle className="text-xl text-white">Iniciar download</CardTitle>
         <CardDescription className="text-white/58">
-          Layout pronto para enviar a URL ao backend.
+          De vídeo longo a conteúdo pronto: resumo, capítulos, posts e cortes
+          sugeridos a partir de um único link.
         </CardDescription>
       </div>
     </div>
