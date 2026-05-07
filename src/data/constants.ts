@@ -1,13 +1,46 @@
-import { Variants } from 'framer-motion';
-import { AudioLines, Video } from 'lucide-react';
+import type { Variants } from 'framer-motion';
+import {
+  AudioLines,
+  FileText,
+  ListTree,
+  Scissors,
+  Sparkles,
+  Video,
+} from 'lucide-react';
 
 export const headerBadges = [
   'YouTube',
-  'Resumo com IA',
-  'Capítulos automáticos',
-  'Transcrição',
-  'Posts prontos',
-  'Sugestões de cortes',
+  'Descrição',
+  'Resumo',
+  'Capítulos',
+  'Cortes sugeridos',
+];
+
+export const outputOptions = [
+  {
+    id: 'summary',
+    label: 'Resumo',
+    icon: Sparkles,
+    description: 'Uma visão direta com os pontos mais importantes do vídeo.',
+  },
+  {
+    id: 'chapters',
+    label: 'Capítulos',
+    icon: ListTree,
+    description: 'Divisão por momentos para navegar pelo conteúdo com clareza.',
+  },
+  {
+    id: 'cuts',
+    label: 'Cortes',
+    icon: Scissors,
+    description: 'Sugestões de trechos fortes para shorts, reels e posts.',
+  },
+  {
+    id: 'description',
+    label: 'Descrição',
+    icon: FileText,
+    description: 'Texto pronto para contextualizar ou publicar o conteúdo.',
+  },
 ];
 
 export const tabs = [

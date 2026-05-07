@@ -1,5 +1,4 @@
 'use client';
-import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { tabs } from '@/src/data/constants';
 import { TabIdProps } from '../types';
@@ -28,34 +27,12 @@ export const DownloadTabs = () => {
     <div className="w-full space-y-5">
       <TabsButtons activeTab={activeTab} handleTabChange={handleTabChange} />
 
-      <AnimatePresence mode="wait">
-        {activeTabData && (
-          <motion.div
-            key={activeTab}
-            initial={{
-              opacity: 0,
-              x: activeTab === 'audio' ? 18 : -18,
-            }}
-            animate={{
-              opacity: 1,
-              x: 0,
-            }}
-            exit={{
-              opacity: 0,
-              x: activeTab === 'audio' ? -18 : 18,
-            }}
-            transition={{
-              duration: 0.2,
-              ease: 'easeOut',
-            }}
-          >
-            <DownloadForm
-              activeTab={activeTab}
-              description={activeTabData.description}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {activeTabData && (
+        <DownloadForm
+          activeTab={activeTab}
+          description={activeTabData.description}
+        />
+      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import { fadeUpVariants } from '../../data/constants';
-import { SmallTitle } from './smallTitle';
+import { SmallTitle } from './SmallTitle';
 import { BadgesSection } from './BadgesSection';
 
 export const Header = () => (

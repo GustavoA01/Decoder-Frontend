@@ -1,16 +1,10 @@
 import { submitLink } from '@/src/actions/submitLink';
-import { DownloadFormData, downloadSchema } from '@/src/data/schemas';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { DownloadFormData } from '@/src/data/schemas';
 import { useMutation } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
 import { TabIdProps } from '../types';
 import { toast } from 'sonner';
 
 export const useDownloadForm = (activeTab: TabIdProps) => {
-  const methods = useForm<DownloadFormData>({
-    resolver: zodResolver(downloadSchema),
-  });
-
   const { mutateAsync: downloadMutation, isPending: isDownloading } =
     useMutation({
       mutationFn: (url: string) => submitLink({ url, mode: activeTab }),
@@ -30,9 +24,6 @@ export const useDownloadForm = (activeTab: TabIdProps) => {
   };
 
   return {
-    register: methods.register,
-    handleSubmit: methods.handleSubmit,
-    errors: methods.formState.errors,
     handleDownload,
     isDownloading,
   };
