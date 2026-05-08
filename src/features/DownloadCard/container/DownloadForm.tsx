@@ -10,7 +10,8 @@ import { InputSection } from '../components/InputSection';
 export const DownloadForm = ({ description, activeTab }: DownloadFormProps) => {
   const { errors, handleSubmit, register } = useSubmitForm();
   const { handleDownload, isDownloading } = useDownloadForm(activeTab);
-  const { onSubmitIAForm, selectedOutput, setSelectedOutput } = useIAForm();
+  const { isGeneratingIA, onSubmitIAForm, selectedOutput, setSelectedOutput } =
+    useIAForm();
 
   return (
     <form id="download" className="space-y-4">
@@ -47,6 +48,7 @@ export const DownloadForm = ({ description, activeTab }: DownloadFormProps) => {
       <FormFooter
         onSubmitIA={handleSubmit(onSubmitIAForm)}
         onSubmitDownload={handleSubmit(handleDownload)}
+        isGeneratingIA={isGeneratingIA}
         isDownloading={isDownloading}
       />
     </form>

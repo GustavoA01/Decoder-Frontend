@@ -1,7 +1,7 @@
 'use server';
 import { SubmitLinkResponseType, SubmitLinkType } from '../data/types';
 
-export const submitLink = async ({
+export const download = async ({
   url,
   mode,
 }: SubmitLinkType): Promise<SubmitLinkResponseType> => {

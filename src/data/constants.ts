@@ -10,10 +10,11 @@ import {
 
 export const headerBadges = [
   'YouTube',
-  'Descrição',
-  'Resumo',
-  'Capítulos',
-  'Cortes sugeridos',
+  'Resumo com IA',
+  'Capítulos automáticos',
+  'Transcrição',
+  'Posts prontos',
+  'Sugestões de cortes',
 ];
 
 export const outputOptions = [
@@ -41,7 +42,7 @@ export const outputOptions = [
     icon: FileText,
     description: 'Texto pronto para contextualizar ou publicar o conteúdo.',
   },
-];
+] as const;
 
 export const tabs = [
   {

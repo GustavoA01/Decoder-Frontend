@@ -1,10 +1,36 @@
+import { iaSummary } from '@/src/actions/iaSummary';
 import { outputOptions } from '@/src/data/constants';
+import { DownloadFormData } from '@/src/data/schemas';
+import { IAOutputType } from '@/src/data/types';
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 export const useIAForm = () => {
-  const [selectedOutput, setSelectedOutput] = useState(outputOptions[0].id);
+  const [selectedOutput, setSelectedOutput] = useState<IAOutputType>(
+    outputOptions[0].id,
+  );
 
-  const onSubmitIAForm = () => {};
+  const { mutateAsync: iaSummaryMutation, isPending: isGeneratingIA } =
+    useMutation({
+      mutationFn: (url: string) => iaSummary({ url, type: selectedOutput }),
+      onSuccess: () => {
+        toast.success('Resultado gerado com sucesso!');
+      },
+      onError: (error) => {
+        toast.error('Erro ao gerar resultado com IA!');
+        console.error(error);
+      },
+    });
 
-  return { selectedOutput, setSelectedOutput, onSubmitIAForm };
+  const onSubmitIAForm = async (data: DownloadFormData) => {
+    await iaSummaryMutation(data.url);
+  };
+
+  return {
+    selectedOutput,
+    setSelectedOutput,
+    onSubmitIAForm,
+    isGeneratingIA,
+  };
 };

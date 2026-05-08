@@ -1,4 +1,4 @@
-import { submitLink } from '@/src/actions/submitLink';
+import { download } from '@/src/actions/download';
 import { DownloadFormData } from '@/src/data/schemas';
 import { useMutation } from '@tanstack/react-query';
 import { TabIdProps } from '../types';
@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 export const useDownloadForm = (activeTab: TabIdProps) => {
   const { mutateAsync: downloadMutation, isPending: isDownloading } =
     useMutation({
-      mutationFn: (url: string) => submitLink({ url, mode: activeTab }),
+      mutationFn: (url: string) => download({ url, mode: activeTab }),
       onSuccess: async (data) => {
         const url = `${process.env.NEXT_PUBLIC_PYTHON_URL}/get-file/${data.filename[0]}`;
         window.location.href = url;

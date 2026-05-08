@@ -1,11 +1,8 @@
-'use client';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { tabs } from '@/src/data/constants';
 import { TabIdProps } from '../types';
-import { DownloadForm } from '../container/DownloadForm';
-import { TabsButtons } from './TabsButtons';
+import { tabs } from '@/src/data/constants';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-export const DownloadTabs = () => {
+export const useChangeTab = () => {
   const { replace } = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -23,16 +20,9 @@ export const DownloadTabs = () => {
     replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-  return (
-    <div className="w-full space-y-5">
-      <TabsButtons activeTab={activeTab} handleTabChange={handleTabChange} />
-
-      {activeTabData && (
-        <DownloadForm
-          activeTab={activeTab}
-          description={activeTabData.description}
-        />
-      )}
-    </div>
-  );
+  return {
+    activeTab,
+    activeTabData,
+    handleTabChange,
+  };
 };

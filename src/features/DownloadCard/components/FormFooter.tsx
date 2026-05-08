@@ -4,6 +4,7 @@ import { Download, Sparkles } from 'lucide-react';
 import { FormFooterProps } from '../types';
 
 export const FormFooter = ({
+  isGeneratingIA,
   isDownloading,
   onSubmitDownload,
   onSubmitIA,
@@ -33,11 +34,21 @@ export const FormFooter = ({
     <Button
       type="button"
       size="lg"
+      disabled={isGeneratingIA}
       className="h-12 w-full rounded-2xl border border-cyan-300/25 bg-cyan-300/10 text-base font-semibold text-cyan-100 transition-all duration-200 hover:bg-cyan-300/16"
       onClick={onSubmitIA}
     >
-      Gerar resultado
-      <Sparkles />
+      {isGeneratingIA ? (
+        <>
+          <Spinner className="size-4 text-cyan-100" />
+          Gerando...
+        </>
+      ) : (
+        <>
+          Gerar resultado
+          <Sparkles />
+        </>
+      )}
     </Button>
   </footer>
 );

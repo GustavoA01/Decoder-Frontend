@@ -1,4 +1,5 @@
 import { DownloadFormData } from '@/src/data/schemas';
+import { IAOutputType } from '@/src/data/types';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
 
 export type TabIdProps = 'video' | 'audio';
@@ -19,13 +20,14 @@ export type TabsButtonsProps = {
 };
 
 export type IASectionProps = {
-  setSelectedOutput: (outputId: string) => void;
-  selectedOutput: string;
+  setSelectedOutput: (outputId: IAOutputType) => void;
+  selectedOutput: IAOutputType;
 };
 
 export type FormFooterProps = {
   onSubmitDownload: () => void;
   onSubmitIA: () => void;
+  isGeneratingIA: boolean;
   isDownloading: boolean;
 };
 

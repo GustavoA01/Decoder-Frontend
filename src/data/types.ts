@@ -10,3 +10,16 @@ export type SubmitLinkResponseType = {
   message: 'Processamento concluído';
   status: 'success';
 };
+
+export type IAOutputType = 'summary' | 'chapters' | 'cuts' | 'description';
+
+export type IASummaryRequestType = {
+  url: string;
+  type: IAOutputType;
+};
+
+export type IASummaryResponseType = {
+  result?: string;
+  message?: string;
+  status?: string;
+};
