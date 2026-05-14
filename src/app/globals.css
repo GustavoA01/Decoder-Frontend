@@ -9,6 +9,27 @@ a {
   cursor: pointer;
 }
 
+@layer utilities {
+  ::-webkit-scrollbar {
+    width: 8px;
+    cursor: pointer;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-surface-hover);
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--primary);
+    }
+  }
+}
+
 .home-background {
   animation: home-background-shift 18s ease-in-out infinite alternate;
   background-position:

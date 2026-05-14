@@ -24,7 +24,8 @@ export const useIAForm = () => {
     });
 
   const onSubmitIAForm = async (data: DownloadFormData) => {
-    await iaSummaryMutation(data.url);
+    const response = await iaSummaryMutation(data.url);
+    console.log(response);
   };
 
   return {
