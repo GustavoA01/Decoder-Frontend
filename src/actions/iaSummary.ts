@@ -5,7 +5,7 @@ export const iaSummary = async ({
   url,
   type,
 }: IASummaryRequestType): Promise<IASummaryResponseType> => {
-  const requestUrl = `${process.env.NEXT_PUBLIC_PYTHON_URL}/ia-summary`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_PYTHON_URL}/ia-summary-stream`;
   const response = await fetch(requestUrl, {
     method: 'POST',
     headers: {

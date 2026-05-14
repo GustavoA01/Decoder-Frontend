@@ -1,16 +1,20 @@
 'use client';
+import { IAResultProvider } from '@/src/data/IAResultContext';
 import { QueryClientProvider } from '@tanstack/react-query';
+import type { ReactNode } from 'react';
 import { queryClient } from '../lib/queryClient';
 import { Toaster } from './ui/sonner';
 
 type ProvidersProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 const Providers = ({ children }: ProvidersProps) => (
   <QueryClientProvider client={queryClient}>
-    <Toaster />
-    {children}
+    <IAResultProvider>
+      <Toaster />
+      {children}
+    </IAResultProvider>
   </QueryClientProvider>
 );
 

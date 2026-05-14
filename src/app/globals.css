@@ -28,6 +28,21 @@ a {
       background: var(--primary);
     }
   }
+
+  @keyframes icon-appear {
+    0% {
+      opacity: 0;
+      scale: 0.5;
+    }
+    50% {
+      opacity: 1;
+      scale: 1.2;
+    }
+    100% {
+      opacity: 1;
+      scale: 1;
+    }
+  }
 }
 
 .home-background {
@@ -67,6 +82,7 @@ a {
 }
 
 @theme inline {
+  --animate-icon-appear: icon-appear 0.7s ease-in-out;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
