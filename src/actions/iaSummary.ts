@@ -1,5 +1,5 @@
 'use server';
-import { IASummaryRequestType, IASummaryResponseType } from '@/src/data/types';
+import { IASummaryRequestType, IASummaryResponseType } from '../data/types/api';
 
 export const iaSummary = async ({
   url,

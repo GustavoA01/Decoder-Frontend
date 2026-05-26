@@ -1,11 +1,11 @@
 ﻿import { outputOptions } from '@/src/data/constants';
 import { useIAResultProvider } from '@/src/data/IAResultContext';
 import { DownloadFormData } from '@/src/data/schemas';
-import { IAOutputType } from '@/src/data/types';
+import { IAOutputType } from '@/src/data/types/api';
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
-function parseSSEEvent(eventText: string) {
+const parseEvent = (eventText: string) => {
   const lines = eventText.split('\n');
   let event = 'message';
   const dataLines: string[] = [];
@@ -13,17 +13,15 @@ function parseSSEEvent(eventText: string) {
   for (const line of lines) {
     if (line.startsWith('event:')) event = line.slice('event:'.length).trim();
 
-    if (line.startsWith('data:')) {
+    if (line.startsWith('data:'))
       dataLines.push(line.slice('data:'.length).replace(/^ /, ''));
-    }
   }
 
   return { event, data: dataLines.join('\n') };
-}
+};
 
-function normalizeStatusMessage(message: string) {
-  return message.replace(/v.deo/gi, 'video');
-}
+const normalizeStatusMessage = (message: string) =>
+  message.replace(/v.deo/gi, 'video');
 
 export const useIAForm = () => {
   const { resetIAResult, setError, setIsGenerating, setStatus, setSummary } =
@@ -52,9 +50,8 @@ export const useIAForm = () => {
 
         const reader = response.body?.getReader();
 
-        if (!reader) {
-          throw new Error('Resposta sem stream');
-        }
+        if (!reader) throw new Error('Resposta sem stream');
+        setStatus('Escrevendo...');
 
         const decoder = new TextDecoder();
         let buffer = '';
@@ -70,7 +67,7 @@ export const useIAForm = () => {
           buffer = events.pop() ?? '';
 
           for (const eventText of events) {
-            const { event, data } = parseSSEEvent(eventText);
+            const { event, data } = parseEvent(eventText);
 
             switch (event) {
               case 'chunk':
@@ -78,25 +75,21 @@ export const useIAForm = () => {
                 break;
               case 'status': {
                 const parsed = JSON.parse(data);
-                setStatus(
-                  normalizeStatusMessage(parsed.message ?? 'Processando...'),
-                );
+                const status = parsed.message ?? 'Processando...';
+                setStatus(normalizeStatusMessage(status));
                 break;
               }
               case 'done': {
                 const parsed = JSON.parse(data);
-                setStatus(
-                  normalizeStatusMessage(
-                    parsed.message ?? 'Resumo gerado com sucesso',
-                  ),
-                );
+                const status = parsed.message ?? 'Resumo gerado com sucesso';
+                setStatus(normalizeStatusMessage(status));
                 break;
               }
               case 'error': {
                 const parsed = JSON.parse(data);
-                throw new Error(
-                  parsed.error ?? parsed.message ?? 'Erro ao gerar resultado',
-                );
+                const error =
+                  parsed.error ?? parsed.message ?? 'Erro ao gerar resultado';
+                throw new Error(error);
               }
               default:
                 console.warn('Evento desconhecido:', event);

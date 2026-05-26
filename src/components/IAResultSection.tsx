@@ -10,6 +10,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export const IAResultSection = () => {
   const { error, isGenerating, status, summary } = useIAResultProvider();
@@ -19,12 +20,10 @@ export const IAResultSection = () => {
   if (!shouldShow) return null;
 
   const handleCopy = () => {
-    if (summary) {
-      if (!copied) {
-        navigator.clipboard.writeText(summary);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      }
+    if (summary && !copied) {
+      navigator.clipboard.writeText(summary);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     }
   };
 
@@ -68,7 +67,13 @@ export const IAResultSection = () => {
         </div>
       ) : (
         <div className="min-h-28 whitespace-pre-wrap rounded-xl border border-white/8 bg-white/5 p-4 text-sm leading-7 text-white/76">
-          {summary}
+          <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {summary}
+          </motion.span>
           {isGenerating && (
             <span className="ml-1 inline-block h-4 w-2 animate-pulse rounded-sm bg-cyan-200 align-[-2px]" />
           )}

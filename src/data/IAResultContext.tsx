@@ -1,34 +1,17 @@
 'use client';
 import {
   createContext,
-  type Dispatch,
   useCallback,
   useContext,
   useMemo,
   useState,
   type ReactNode,
-  type SetStateAction,
 } from 'react';
+import { IAResultContextType } from './types';
 
-type IAResultContextValue = {
-  summary: string;
-  status: string | null;
-  error: string | null;
-  isGenerating: boolean;
-  setSummary: Dispatch<SetStateAction<string>>;
-  setStatus: Dispatch<SetStateAction<string | null>>;
-  setError: Dispatch<SetStateAction<string | null>>;
-  setIsGenerating: Dispatch<SetStateAction<boolean>>;
-  resetIAResult: () => void;
-};
+const IAResultContext = createContext<IAResultContextType | null>(null);
 
-type IAResultProviderProps = {
-  children: ReactNode;
-};
-
-const IAResultContext = createContext<IAResultContextValue | null>(null);
-
-export const IAResultProvider = ({ children }: IAResultProviderProps) => {
+export const IAResultProvider = ({ children }: { children: ReactNode }) => {
   const [summary, setSummary] = useState('');
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -66,11 +49,8 @@ export const IAResultProvider = ({ children }: IAResultProviderProps) => {
 export const useIAResultProvider = () => {
   const context = useContext(IAResultContext);
 
-  if (!context) {
-    throw new Error(
-      'useIAResultProvider deve ser usado dentro de IAResultProvider',
-    );
-  }
+  if (!context)
+    throw new Error('useIAResultProvider deve ser usado dentro do provider');
 
   return context;
 };

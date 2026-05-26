@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Geist_Mono, Montserrat, Inter } from 'next/font/google';
 import './globals.css';
 import { cn } from '@/src/lib/utils';
-import Providers from '@/src/components/Providers';
+import { Providers } from '../components/Providers';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 

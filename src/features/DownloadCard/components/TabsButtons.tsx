@@ -1,6 +1,7 @@
 import { tabs } from '@/src/data/constants';
 import { motion } from 'framer-motion';
-import { TabIdProps, TabsButtonsProps } from '../types';
+import { TabsButtonsProps } from '../types';
+import { TabIdProps } from '@/src/data/types';
 
 export const TabsButtons = ({
   activeTab,
@@ -10,15 +11,13 @@ export const TabsButtons = ({
     {tabs.map((tab) => {
       const Icon = tab.icon;
       const isActive = activeTab === tab.id;
+      const textColor = isActive ? 'text-slate-950' : 'text-white';
 
       return (
         <button
           key={tab.id}
-          type="button"
           onClick={() => handleTabChange(tab.id as TabIdProps)}
-          className={`relative flex h-11 cursor-pointer items-center justify-center gap-2 rounded-xl text-sm transition ${
-            isActive ? 'text-slate-950' : 'text-white'
-          }`}
+          className={`relative flex h-11 cursor-pointer items-center justify-center gap-2 rounded-xl text-sm transition ${textColor}`}
         >
           {isActive && (
             <motion.span

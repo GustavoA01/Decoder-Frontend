@@ -1,8 +1,7 @@
 import { DownloadFormData } from '@/src/data/schemas';
-import { IAOutputType } from '@/src/data/types';
+import { TabIdProps } from '@/src/data/types';
+import { IAOutputType } from '@/src/data/types/api';
 import { FieldErrors, UseFormRegister } from 'react-hook-form';
-
-export type TabIdProps = 'video' | 'audio';
 
 export type DownloadTabsProps = {
   activeTab: TabIdProps;

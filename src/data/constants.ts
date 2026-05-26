@@ -8,7 +8,7 @@ import {
   Video,
 } from 'lucide-react';
 
-export const headerBadges = [
+export const headerBadgesLabels = [
   'YouTube',
   'Resumo com IA',
   'Capítulos automáticos',
@@ -42,14 +42,14 @@ export const outputOptions = [
     icon: FileText,
     description: 'Texto pronto para contextualizar ou publicar o conteúdo.',
   },
-] as const;
+];
 
 export const tabs = [
   {
     id: 'video',
-    label: 'Video',
+    label: 'Vídeo',
     icon: Video,
-    description: 'Baixa o arquivo em formato de video a partir da URL enviada.',
+    description: 'Baixa o arquivo em formato de vídeo a partir da URL enviada.',
   },
   {
     id: 'audio',

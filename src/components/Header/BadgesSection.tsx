@@ -1,4 +1,4 @@
-import { headerBadges } from '@/src/data/constants';
+import { headerBadgesLabels } from '@/src/data/constants';
 import { motion } from 'framer-motion';
 
 export const BadgesSection = () => (
@@ -12,9 +12,9 @@ export const BadgesSection = () => (
       },
     }}
   >
-    {headerBadges.map((text) => (
+    {headerBadgesLabels.map((label) => (
       <motion.div
-        key={text}
+        key={label}
         className="rounded-full border border-white/10 bg-white/6 px-4 py-2 backdrop-blur-sm"
         variants={{
           hidden: {
@@ -38,7 +38,7 @@ export const BadgesSection = () => (
           backgroundColor: 'rgba(255, 255, 255, 0.09)',
         }}
       >
-        {text}
+        {label}
       </motion.div>
     ))}
   </motion.section>

@@ -5,11 +5,7 @@ import type { ReactNode } from 'react';
 import { queryClient } from '../lib/queryClient';
 import { Toaster } from './ui/sonner';
 
-type ProvidersProps = {
-  children: ReactNode;
-};
-
-const Providers = ({ children }: ProvidersProps) => (
+export const Providers = ({ children }: { children: ReactNode }) => (
   <QueryClientProvider client={queryClient}>
     <IAResultProvider>
       <Toaster />
@@ -17,5 +13,3 @@ const Providers = ({ children }: ProvidersProps) => (
     </IAResultProvider>
   </QueryClientProvider>
 );
-
-export default Providers;

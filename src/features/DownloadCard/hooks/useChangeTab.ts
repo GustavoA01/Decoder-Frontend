@@ -1,5 +1,5 @@
-import { TabIdProps } from '../types';
 import { tabs } from '@/src/data/constants';
+import { TabIdProps } from '@/src/data/types';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export const useChangeTab = () => {

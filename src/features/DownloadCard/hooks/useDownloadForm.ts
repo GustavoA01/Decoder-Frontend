@@ -1,7 +1,7 @@
 import { download } from '@/src/actions/download';
 import { DownloadFormData } from '@/src/data/schemas';
+import { TabIdProps } from '@/src/data/types';
 import { useMutation } from '@tanstack/react-query';
-import { TabIdProps } from '../types';
 import { toast } from 'sonner';
 
 export const useDownloadForm = (activeTab: TabIdProps) => {
@@ -19,9 +19,8 @@ export const useDownloadForm = (activeTab: TabIdProps) => {
       },
     });
 
-  const handleDownload = async (data: DownloadFormData) => {
+  const handleDownload = async (data: DownloadFormData) =>
     await downloadMutation(data.url);
-  };
 
   return {
     handleDownload,
