@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
-import { useIAResultSection } from './useIAResultSection';
+import { useCopySummary } from './useCopySummary';
 
-describe('useIAResultSection', () => {
+describe('useCopySummary', () => {
   beforeEach(() => {
     jest.useFakeTimers();
 
@@ -19,13 +19,13 @@ describe('useIAResultSection', () => {
   });
 
   it('should initialize copied as false', () => {
-    const { result } = renderHook(() => useIAResultSection());
+    const { result } = renderHook(() => useCopySummary());
 
     expect(result.current.copied).toBe(false);
   });
 
   it('should copy the summary to clipboard', () => {
-    const { result } = renderHook(() => useIAResultSection());
+    const { result } = renderHook(() => useCopySummary());
 
     act(() => {
       result.current.handleCopy('Resumo gerado');
@@ -35,7 +35,7 @@ describe('useIAResultSection', () => {
   });
 
   it('should set copied to true after copying', () => {
-    const { result } = renderHook(() => useIAResultSection());
+    const { result } = renderHook(() => useCopySummary());
 
     act(() => {
       result.current.handleCopy('Resumo gerado');
@@ -45,7 +45,7 @@ describe('useIAResultSection', () => {
   });
 
   it('should reset copied to false after 2 seconds', () => {
-    const { result } = renderHook(() => useIAResultSection());
+    const { result } = renderHook(() => useCopySummary());
 
     act(() => {
       result.current.handleCopy('Resumo gerado');
@@ -61,7 +61,7 @@ describe('useIAResultSection', () => {
   });
 
   it('should not copy when summary is empty', () => {
-    const { result } = renderHook(() => useIAResultSection());
+    const { result } = renderHook(() => useCopySummary());
 
     act(() => {
       result.current.handleCopy('');
@@ -72,7 +72,7 @@ describe('useIAResultSection', () => {
   });
 
   it('should not copy again while copied is true', () => {
-    const { result } = renderHook(() => useIAResultSection());
+    const { result } = renderHook(() => useCopySummary());
 
     act(() => {
       result.current.handleCopy('Primeiro resumo');

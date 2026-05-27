@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useIAResultSection = () => {
+export const useCopySummary = () => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = (summary: string) => {

@@ -7,6 +7,7 @@ import {
   Sparkles,
   Video,
 } from 'lucide-react';
+import { OutputOptionsType } from './types';
 
 export const headerBadgesLabels = [
   'YouTube',
@@ -17,7 +18,7 @@ export const headerBadgesLabels = [
   'Sugestões de cortes',
 ];
 
-export const outputOptions = [
+export const outputOptions: OutputOptionsType = [
   {
     id: 'summary',
     label: 'Resumo',
@@ -49,7 +50,7 @@ export const tabs = [
     id: 'video',
     label: 'Vídeo',
     icon: Video,
-    description: 'Baixa o arquivo em formato de vídeo a partir da URL enviada.',
+    description: 'Baixa o arquivo em formato de vídeo a partir da URL enviada',
   },
   {
     id: 'audio',

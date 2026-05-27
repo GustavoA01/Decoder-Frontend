@@ -33,7 +33,6 @@ export const BadgesSection = () => (
           },
         }}
         whileHover={{
-          y: -2,
           borderColor: 'rgba(103, 232, 249, 0.36)',
           backgroundColor: 'rgba(255, 255, 255, 0.09)',
         }}

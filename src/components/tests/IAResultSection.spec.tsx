@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { useIAResultProvider } from '@/src/data/IAResultContext';
-import { useIAResultSection } from '@/src/hooks/useIAResultSection';
+import { useCopySummary } from '@/src/hooks/useCopySummary';
 import { IAResultSection } from '../IAResultSection';
 import userEvent from '@testing-library/user-event';
 
@@ -8,8 +8,8 @@ jest.mock('../../data/IAResultContext', () => ({
   useIAResultProvider: jest.fn(),
 }));
 
-jest.mock('../../hooks/useIAResultSection', () => ({
-  useIAResultSection: jest.fn(),
+jest.mock('../../hooks/useCopySummary', () => ({
+  useCopySummary: jest.fn(),
 }));
 
 jest.mock('../ui/button', () => ({
@@ -27,7 +27,7 @@ describe('IAResultSection', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
-    (useIAResultSection as jest.Mock).mockReturnValue({
+    (useCopySummary as jest.Mock).mockReturnValue({
       copied: false,
       handleCopy,
     });
@@ -118,7 +118,7 @@ describe('IAResultSection', () => {
   });
 
   it('should show copied icon when copied is true', () => {
-    (useIAResultSection as jest.Mock).mockReturnValue({
+    (useCopySummary as jest.Mock).mockReturnValue({
       copied: true,
       handleCopy,
     });

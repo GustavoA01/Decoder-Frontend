@@ -10,11 +10,11 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useIAResultSection } from '../hooks/useIAResultSection';
+import { useCopySummary } from '../hooks/useCopySummary';
 
 export const IAResultSection = () => {
   const { error, isGenerating, status, summary } = useIAResultProvider();
-  const { copied, handleCopy } = useIAResultSection();
+  const { copied, handleCopy } = useCopySummary();
   const shouldShow = Boolean(summary || status || error || isGenerating);
 
   if (!shouldShow) return null;
@@ -22,7 +22,7 @@ export const IAResultSection = () => {
   return (
     <section className="rounded-2xl border border-white/10 bg-black/18 p-5 text-white shadow-2xl shadow-black/20 backdrop-blur-xl">
       <div className="mb-4 flex items-center justify-between gap-3">
-        <div className="flex min-w-0 items-center gap-3">
+        <header className="flex min-w-0 items-center gap-3">
           <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-cyan-300/12 text-cyan-200">
             <Sparkles className="size-4" />
           </div>
@@ -32,7 +32,7 @@ export const IAResultSection = () => {
             </h2>
             {status && <p className="text-sm animate-pulse">{status}</p>}
           </div>
-        </div>
+        </header>
 
         {isGenerating ? (
           <Loader2 className="size-5 shrink-0 animate-spin text-cyan-200" />
