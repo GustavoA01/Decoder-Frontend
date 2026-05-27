@@ -9,23 +9,15 @@ import {
   Loader2,
   Sparkles,
 } from 'lucide-react';
-import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useIAResultSection } from '../hooks/useIAResultSection';
 
 export const IAResultSection = () => {
   const { error, isGenerating, status, summary } = useIAResultProvider();
+  const { copied, handleCopy } = useIAResultSection();
   const shouldShow = Boolean(summary || status || error || isGenerating);
-  const [copied, setCopied] = useState(false);
 
   if (!shouldShow) return null;
-
-  const handleCopy = () => {
-    if (summary && !copied) {
-      navigator.clipboard.writeText(summary);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
 
   return (
     <section className="rounded-2xl border border-white/10 bg-black/18 p-5 text-white shadow-2xl shadow-black/20 backdrop-blur-xl">
@@ -47,7 +39,11 @@ export const IAResultSection = () => {
         ) : (
           summary && (
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="icon" onClick={handleCopy}>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => handleCopy(summary)}
+              >
                 {copied ? (
                   <CopyCheck className="size-5 animate-icon-appear transition-all duration-300 text-green-400" />
                 ) : (
