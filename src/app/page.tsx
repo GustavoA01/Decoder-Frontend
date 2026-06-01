@@ -1,7 +1,7 @@
-import { Suspense } from 'react';
+﻿import { Suspense } from 'react';
 import { Header } from '../components/Header';
 import { DownloadCard } from '@/src/features/DownloadCard/container';
-import { IAResultSection } from '@/src/components/IAResultSection';
+import { IAResultSection } from '@/src/features/IAResultSection/container';
 
 const HomePage = () => (
   <main className="home-background relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top,rgba(120,119,198,0.28),transparent_32%),linear-gradient(180deg,#09090f_0%,#0f1220_48%,#07070b_100%)] px-6 py-10 text-white">

@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { useCopySummary } from './useCopySummary';
+import { useCopySummary } from '../hooks/useCopySummary';
 
 describe('useCopySummary', () => {
   beforeEach(() => {

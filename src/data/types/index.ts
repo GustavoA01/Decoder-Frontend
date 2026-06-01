@@ -17,6 +17,11 @@ export type IAResultContextType = {
   resetIAResult: () => void;
 };
 
+export type StoredIAResultType = {
+  summary: string;
+  status: string | null;
+};
+
 export type OutputOptionsType = {
   id: IAOutputType;
   label: string;

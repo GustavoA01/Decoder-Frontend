@@ -1,33 +1,98 @@
-'use client';
+﻿'use client';
 import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
+  useSyncExternalStore,
   type ReactNode,
 } from 'react';
-import { IAResultContextType } from './types';
+import { IAResultContextType, StoredIAResultType } from './types';
+
+const IA_RESULT_STORAGE_KEY = 'decoder:last-ia-result';
+const IA_RESULT_STORAGE_EVENT = 'decoder:ia-result-storage-change';
 
 const IAResultContext = createContext<IAResultContextType | null>(null);
 
+const getStoredIAResultSnapshot = () => {
+  if (typeof window === 'undefined') return null;
+
+  return window.localStorage.getItem(IA_RESULT_STORAGE_KEY);
+};
+
+const subscribeToStoredIAResult = (callback: () => void) => {
+  window.addEventListener('storage', callback);
+  window.addEventListener(IA_RESULT_STORAGE_EVENT, callback);
+
+  return () => {
+    window.removeEventListener('storage', callback);
+    window.removeEventListener(IA_RESULT_STORAGE_EVENT, callback);
+  };
+};
+
+const notifyStoredIAResultChange = () => {
+  window.dispatchEvent(new Event(IA_RESULT_STORAGE_EVENT));
+};
+
+const parseStoredIAResult = (
+  storedValue: string | null,
+): StoredIAResultType | null => {
+  if (!storedValue) return null;
+
+  try {
+    const parsed = JSON.parse(storedValue) as StoredIAResultType;
+
+    if (!parsed.summary) return null;
+
+    return parsed;
+  } catch {
+    return null;
+  }
+};
+
 export const IAResultProvider = ({ children }: { children: ReactNode }) => {
+  const storedValue = useSyncExternalStore(
+    subscribeToStoredIAResult,
+    getStoredIAResultSnapshot,
+    () => null,
+  );
+  const storedResult = useMemo(
+    () => parseStoredIAResult(storedValue),
+    [storedValue],
+  );
   const [summary, setSummary] = useState('');
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+
+  const visibleSummary = summary || storedResult?.summary || '';
+  const visibleStatus = status ?? storedResult?.status ?? null;
+
+  useEffect(() => {
+    if (isGenerating || error || !summary) return;
+
+    window.localStorage.setItem(
+      IA_RESULT_STORAGE_KEY,
+      JSON.stringify({ summary, status }),
+    );
+    notifyStoredIAResultChange();
+  }, [error, isGenerating, status, summary]);
 
   const resetIAResult = useCallback(() => {
     setSummary('');
     setStatus(null);
     setError(null);
     setIsGenerating(false);
+    window.localStorage.removeItem(IA_RESULT_STORAGE_KEY);
+    notifyStoredIAResultChange();
   }, []);
 
   const value = useMemo(
     () => ({
-      summary,
-      status,
+      summary: visibleSummary,
+      status: visibleStatus,
       error,
       isGenerating,
       setSummary,
@@ -36,7 +101,7 @@ export const IAResultProvider = ({ children }: { children: ReactNode }) => {
       setIsGenerating,
       resetIAResult,
     }),
-    [error, isGenerating, resetIAResult, status, summary],
+    [error, isGenerating, resetIAResult, visibleStatus, visibleSummary],
   );
 
   return (
