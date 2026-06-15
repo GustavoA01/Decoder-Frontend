@@ -1,4 +1,4 @@
-import { TabIdProps } from '.';
+﻿import { TabIdProps } from '.';
 
 export type IAOutputType = 'summary' | 'chapters' | 'cuts' | 'description';
 
@@ -8,9 +8,15 @@ export type IASummaryRequestType = {
 };
 
 export type IASummaryResponseType = {
-  result?: string;
-  message?: string;
-  status?: string;
+  status: 'success';
+  message: string;
+  video_id: string;
+  url: string;
+  title: string;
+  author: string;
+  video_file: string;
+  summary_source: 'video_file';
+  summary: string;
 };
 
 export type SubmitLinkType = {
@@ -20,6 +26,6 @@ export type SubmitLinkType = {
 
 export type SubmitLinkResponseType = {
   filename: string[];
-  message: 'Processamento concluído';
+  message: 'Processamento concluÃ­do';
   status: 'success';
 };

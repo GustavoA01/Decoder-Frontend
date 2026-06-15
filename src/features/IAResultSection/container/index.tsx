@@ -19,7 +19,7 @@ export const IAResultSection = () => {
       className="rounded-2xl border border-white/10 bg-black/18 p-5 text-white shadow-2xl shadow-black/20 backdrop-blur-xl"
     >
       <div className="mb-4 flex items-center justify-between gap-3">
-        <IAResultHeader status={status} />
+        <IAResultHeader status={status} isGenerating={isGenerating} />
         <IAResultActions isGenerating={isGenerating} summary={summary} />
       </div>
 

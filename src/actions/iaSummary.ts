@@ -1,11 +1,11 @@
-'use server';
+﻿'use server';
 import { IASummaryRequestType, IASummaryResponseType } from '../data/types/api';
 
 export const iaSummary = async ({
   url,
   type,
 }: IASummaryRequestType): Promise<IASummaryResponseType> => {
-  const requestUrl = `${process.env.NEXT_PUBLIC_PYTHON_URL}/ia-summary-stream`;
+  const requestUrl = `${process.env.NEXT_PUBLIC_PYTHON_URL}/ia-summary`;
   const response = await fetch(requestUrl, {
     method: 'POST',
     headers: {

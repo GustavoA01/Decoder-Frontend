@@ -12,10 +12,10 @@ export const DownloadHeader = () => (
         <Download className="size-5" />
       </div>
       <div className="min-w-0 space-y-1">
-        <CardTitle className="text-xl leading-tight text-white">
+        <CardTitle className="text-xl leading-tight text-white select-none">
           Decodificar vídeo
         </CardTitle>
-        <CardDescription className="max-w-sm text-white/58">
+        <CardDescription className="max-w-sm text-white/58 select-none">
           Cole um link e escolha como quer transformar o conteúdo.
         </CardDescription>
       </div>

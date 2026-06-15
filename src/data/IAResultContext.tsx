@@ -68,14 +68,14 @@ export const IAResultProvider = ({ children }: { children: ReactNode }) => {
   const [isGenerating, setIsGenerating] = useState(false);
 
   const visibleSummary = summary || storedResult?.summary || '';
-  const visibleStatus = status ?? storedResult?.status ?? null;
+  const visibleStatus = status;
 
   useEffect(() => {
     if (isGenerating || error || !summary) return;
 
     window.localStorage.setItem(
       IA_RESULT_STORAGE_KEY,
-      JSON.stringify({ summary, status }),
+      JSON.stringify({ summary, status: null }),
     );
     notifyStoredIAResultChange();
   }, [error, isGenerating, status, summary]);

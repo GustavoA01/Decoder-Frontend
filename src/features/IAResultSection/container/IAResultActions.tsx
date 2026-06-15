@@ -1,11 +1,7 @@
 ﻿import { Button } from '@/src/components/ui/button';
 import { CheckCircle2, Copy, CopyCheck, Loader2 } from 'lucide-react';
 import { useCopySummary } from '@/src/features/IAResultSection/hooks/useCopySummary';
-
-type IAResultActionsProps = {
-  isGenerating: boolean;
-  summary: string;
-};
+import { IAResultActionsProps } from '../types';
 
 export const IAResultActions = ({
   isGenerating,
